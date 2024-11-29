@@ -1,7 +1,9 @@
 .vscode/**
 .vscode-test/**
 src/**
+node_modules/**
 .gitignore
+.env
 .yarnrc
 vsc-extension-quickstart.md
 **/tsconfig.json
@@ -9,3 +11,6 @@ vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 **/.vscode-test.*
+autocom-*.vsix
+package-lock.json
+*~

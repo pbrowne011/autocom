@@ -3,13 +3,25 @@
   "displayName": "Autocom",
   "publisher": "pbrowne011",
   "icon": "img/icon.png",
-  "description": "Automatically comment your code with generative models",
+  "description": "Automatically comment your code with generative AI models",
   "version": "0.0.2",
+  "license": "GPL-3.0-only",
   "engines": {
     "vscode": "^1.95.0"
   },
   "categories": [
-    "Other"
+    "Snippets",
+    "Programming Languages",
+    "Extension Packs",
+    "AI",
+    "Formatters"
+  ],
+  "keywords": [
+    "auto-comment",
+    "documentation",
+    "comments",
+    "AI",
+    "comment-generation"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
