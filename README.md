@@ -9,9 +9,9 @@ generative models.
 - multiple LLMs
 - multiple languages supported
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+TODO: include screen recordings using Autocom
 
-For example if there is an image subfolder under your extension project workspace:
+TODO: add recording to image folder with syntax below:
 
 \!\[feature X\]\(images/feature-x.png\)
 
@@ -19,7 +19,7 @@ For example if there is an image subfolder under your extension project workspac
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Describe `axios` dependency
 
 ## Extension Settings
 
@@ -32,13 +32,15 @@ This extension contributes the following settings:
 * `myExtension.enable`: Enable/disable this extension.
 * `myExtension.thing`: Set to `blah` to do something.
 
+TODO add settings to change prompt, model, max_tokens
+
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Issues: one fixed prompt, no customized comments, ...
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+This is the first version, it's very basic in its features and functionality.
 
 ### 0.0.1
 
