@@ -1,8 +1,11 @@
+import { CommentVerbosity } from "./prompts";
+
 export type Provider = 'anthropic' | 'openai';// | 'gemini';
 
 export interface CommentOptions {
-    style: 'block' | 'inline';
-    verbosity: number;
+    type: 'function' | 'inline' | 'block';
+    verbosity: CommentVerbosity;
+    language?: string;
     maxLength?: number;
 }
 

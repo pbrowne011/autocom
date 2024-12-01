@@ -2,18 +2,33 @@ import * as vscode from 'vscode';
 import axios from 'axios';
 import { CommentGenerator } from './base';
 import { CommentOptions } from '../types/models';
+import { PromptManager } from '../config/manager';
+import { CommentVerbosity } from '../types/prompts';
 
 const ANTHROPIC_KEY_SECRET = 'anthropic-api-key';
 
 export class AnthropicGenerator extends CommentGenerator {
     private apiKey: string | undefined;
+    private promptManager: PromptManager;
+
+    constructor(context: vscode.ExtensionContext) {
+        super(context);
+        this.promptManager = new PromptManager();
+    }
 
     async generateComment(code: string, options?: CommentOptions): Promise<string> {
         // Get API key
         this.apiKey = await this.getApiKey(
             ANTHROPIC_KEY_SECRET,
             'Enter your Anthropic API key'
-        )
+        );
+
+        const prompt = this.promptManager.getPrompt(
+            options?.type || 'function',
+            options?.verbosity || CommentVerbosity.Concise,
+            options?.language,
+            { code }
+        );
 
         try {
             const response = await axios.post(
@@ -23,7 +38,7 @@ export class AnthropicGenerator extends CommentGenerator {
                     max_tokens: 4096,
                     messages: [{
                         role: 'user',
-                        content: `Please write a clear, concise comment explaining what this code does. Focus on the purpose and any important details. Here's the code:\n\n${code}`
+                        content: prompt
                     }]
                 },
                 {

@@ -4,7 +4,6 @@ import { Provider } from './types/models';
 import { formatComment } from './format';
 
 export function activate(context: vscode.ExtensionContext) {
-    // Register commands for different AI providers
     context.subscriptions.push(
         vscode.commands.registerCommand(
             'ai-commenter.anthropicComment',
@@ -58,7 +57,6 @@ async function generateComment(provider: Provider, context: vscode.ExtensionCont
         return;
     }
 
-    // Show loading indicator
     const status = vscode.window.createStatusBarItem(
         vscode.StatusBarAlignment.Left
     );
