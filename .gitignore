@@ -10,7 +10,6 @@ dist/
 # VS Code specific files
 .vscode-test/
 *.vsix
-.vscode-test.mjs
 .vscode/**/*
 !.vscode/launch.json
 !.vscode/tasks.json
