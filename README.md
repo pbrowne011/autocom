@@ -1,51 +1,99 @@
-# autocom README
+# autocom
 
-Autocom is a VSCode extension that automatically comments your code using
-generative models.
+[![VS Marketplace Version](https://shields.io/visual-studio-marketplace/v/pbrowne011.autocom?color=blue)](https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom)
+[![VS Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/pbrowne011.autocom?color=green)](https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom)
+[![VS Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/pbrowne011.autocom)](https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom)
+
+Autocom is a VS Code extension that automatically comments your code using
+generative AI models such as GPT-4 and Claude Sonnet 3.5.
+
+<p align="center">
+  <img src="img/demo-overview.gif" alt="Overview of autocom in action" width="600"/>
+</p>
+
+## Installation
+
+Install autocom from the VS Code Marketplace or by searching for "autocom" in
+the VS Code extensions panel (`Ctrl-Shift-X`).
+
+## Usage
+
+To use, highlight the code you want to comment and press `Ctrl-Alt-C` to create
+a comment above using OpenAI's models. Alternatively, press `Ctrl-Alt-G` to
+create a comment using Anthropic's models.
+
+<insert diff comment gif>
+
+A popup also appears when you highlight code, or you can right click your code
+selection to comment.
+
+<insert highlight gif>
+
+<insert right click gif>
+
+The first time you use each model, you will be prompted for an API key, which
+is stored securely by your OS. 
+- [Get OpenAI API key](https://platform.openai.com/account/api-keys)
+- [Get Anthropic API key](https://console.anthropic.com/settings/keys)
 
 ## Features
 
-- keyboard shortcuts
-- multiple LLMs
-- multiple languages supported
+- **One-click comment generation** for functions, classes, and code blocks
+- **Multiple AI models** supported:
+  - Anthropic: `claude-3-sonnet` (default), `claude-3-opus`, `claude-3-haiku`
+  - OpenAI: `gpt-4-turbo` (default), `gpt-4`, `gpt-3.5-turbo`
+- **Smart language detection** and appropriate comment styling
+- **Support for 10+ languages** including C++, Python, JavaScript, Java, Go,
+  and Rust,
+- **Default keyboard shortcuts** for convenient use
 
-TODO: include screen recordings using Autocom
+<insert two diff langs gifs>
 
-TODO: add recording to image folder with syntax below:
+## Configuration
 
-\!\[feature X\]\(images/feature-x.png\)
+Configure through VS Code settings (File > Preferences > Settings > Extensions > Autocom):
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+```jsonc
+{
+    // Choose AI models
+    "autocom.openaiModel": "gpt-4-turbo",        // "gpt-4", "gpt-3.5-turbo"
+    "autocom.anthropicModel": "claude-3-sonnet", // "claude-3-opus", "claude-3-haiku"
+    
+    // Comment style
+    "autocom.commentVerbosity": "standard",     // "concise" or "detailed"
+    
+    // Optional: Custom prompt templates
+    "autocom.customPrompts": {
+        "function": {
+            "standard": "Generate a comment explaining what this function does..."
+        }
+    }
+}
+```
 
-## Requirements
-
-Describe `axios` dependency
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-TODO add settings to change prompt, model, max_tokens
+The `customPrompts` setting allows you to override default prompts for different
+comment types and verbosity levels. See documentation for template variables
+and examples. (TODO: add this documentation)
 
 ## Known Issues
 
-Issues: one fixed prompt, no customized comments, ...
+- Does not work with WSL or remote connections
+- Does not allow inline commments, only block comments at the top of a
+  block of code
 
-## Release Notes
+## License
 
-This is the first version, it's very basic in its features and functionality.
+GPL 3.0
 
-### 0.0.1
+## Development
 
-Initial release of Autocom
+```
+# Working on features
+git commit -m "add block comment tests"
+git push
 
-
-
-
+# Ready for new version
+npm version patch  # Updates version in package.json
+git push
+git push --tags    # This triggers the CI/CD pipeline
+```
