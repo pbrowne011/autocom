@@ -4,7 +4,7 @@
   "publisher": "pbrowne011",
   "icon": "img/icon.png",
   "description": "Automatically comment your code with generative AI models",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "license": "GPL-3.0-only",
   "engines": {
     "vscode": "^1.95.0"
@@ -71,19 +71,31 @@
       "properties": {
         "autocom.openaiModel": {
           "type": "string",
-          "enum": ["gpt-4-turbo", "gpt-4", "gpt-3.5-turbo"],
+          "enum": [
+            "gpt-4-turbo",
+            "gpt-4",
+            "gpt-3.5-turbo"
+          ],
           "default": "gpt-4-turbo",
           "description": "OpenAI model to use for comment generation"
         },
         "autocom.anthropicModel": {
           "type": "string",
-          "enum": ["claude-3-sonnet", "claude-3-opus", "claude-3-haiku"],
+          "enum": [
+            "claude-3-sonnet",
+            "claude-3-opus",
+            "claude-3-haiku"
+          ],
           "default": "claude-3-sonnet",
           "description": "Anthropic model to use for comment generation"
         },
         "autocom.commentVerbosity": {
           "type": "string",
-          "enum": ["concise", "standard", "detailed"],
+          "enum": [
+            "concise",
+            "standard",
+            "detailed"
+          ],
           "default": "standard",
           "description": "Level of detail in generated comments"
         },
@@ -95,17 +107,29 @@
             "function": {
               "type": "object",
               "properties": {
-                "concise": { "type": "string" },
-                "standard": { "type": "string" },
-                "detailed": { "type": "string" }
+                "concise": {
+                  "type": "string"
+                },
+                "standard": {
+                  "type": "string"
+                },
+                "detailed": {
+                  "type": "string"
+                }
               }
             },
             "inline": {
               "type": "object",
               "properties": {
-                "concise": { "type": "string" },
-                "standard": { "type": "string" },
-                "detailed": { "type": "string" }
+                "concise": {
+                  "type": "string"
+                },
+                "standard": {
+                  "type": "string"
+                },
+                "detailed": {
+                  "type": "string"
+                }
               }
             }
           }
