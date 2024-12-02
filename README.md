@@ -1,7 +1,7 @@
 # autocom
 
 [![VS Marketplace Version](https://shields.io/visual-studio-marketplace/v/pbrowne011.autocom?color=blue)](https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom)
-[![VS Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/pbrowne011.autocom?color=green)](https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom)
+[![VS Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/pbrowne011.autocom?color=darkgreen)](https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom)
 [![VS Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/pbrowne011.autocom)](https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom)
 
 Autocom is a VS Code extension that automatically comments your code using
