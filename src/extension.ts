@@ -2,27 +2,30 @@ import * as vscode from 'vscode';
 import { getGenerator } from './generators';
 import { Provider } from './types/models';
 import { formatComment } from './format';
-import { throws } from 'assert';
 
-export function activate(context: vscode.ExtensionContext) {
-    const codeLensProvider = new CommentCodeLensProvider();
-
-    context.subscriptions.push(
-        vscode.commands.registerCommand(
-            'ai-commenter.anthropicComment',
-            async () => await generateComment('anthropic', context)
-        ),
-        vscode.commands.registerCommand(
-            'ai-commenter.openaiComment',
-            async () => await generateComment('openai', context)
-        ),
-        vscode.languages.registerCodeLensProvider('*', codeLensProvider)
+export async function activate(context: vscode.ExtensionContext) {
+    let anthropicCommand = vscode.commands.registerCommand(
+        'ai-commenter.anthropicComment',
+        async () => await generateComment('anthropic', context)
     );
+    
+    let openaiCommand = vscode.commands.registerCommand(
+        'ai-commenter.openaiComment',
+        async () => await generateComment('openai', context)
+    );
+    
+    let codeLensProvider = new CommentCodeLensProvider();
+    let codeLensDisposable = vscode.languages.registerCodeLensProvider('*', codeLensProvider);
+    
+    let selectionDisposable = vscode.window.onDidChangeTextEditorSelection(() => {
+        codeLensProvider.refresh();
+    });
 
     context.subscriptions.push(
-        vscode.window.onDidChangeTextEditorSelection(() => {
-            codeLensProvider.refresh();
-        })
+        anthropicCommand,
+        openaiCommand,
+        codeLensDisposable,
+        selectionDisposable
     );
 }
 

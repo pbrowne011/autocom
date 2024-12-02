@@ -2,6 +2,8 @@
 
 ## High Priority
 
+- [ ] Make comments doxygen-style by default
+
 ### UI Improvements
 - [ ] Add intuitive ways to change comment settings without editing `settings.json`
   - [ ] Add CodeLens above functions to quickly change comment style
