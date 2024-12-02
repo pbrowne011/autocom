@@ -8,17 +8,41 @@ export interface LanguageSpecificPrompt {
     conventions?: string;
 }
 
+export interface CommentTypeConfig {
+    [CommentVerbosity.Concise]?: PromptTemplate;
+    [CommentVerbosity.Standard]?: PromptTemplate;
+    [CommentVerbosity.Detailed]?: PromptTemplate;
+}
+
 export interface PromptConfig {
     templates: {
-        function: Record<CommentVerbosity, PromptTemplate>;
-        inline: Record<CommentVerbosity, PromptTemplate>;
-        block?: Record<CommentVerbosity, PromptTemplate>;
+        function: CommentTypeConfig;
+        inline: CommentTypeConfig;
+        block?: CommentTypeConfig;
     };
     languageOverrides?: Record<string, LanguageSpecificPrompt>;
 }
 
+export interface CustomPrompts {
+    function?: {
+        [CommentVerbosity.Concise]?: string;
+        [CommentVerbosity.Standard]?: string;
+        [CommentVerbosity.Detailed]?: string;
+    };
+    inline?: {
+        [CommentVerbosity.Concise]?: string;
+        [CommentVerbosity.Standard]?: string;
+        [CommentVerbosity.Detailed]?: string;
+    };
+    block?: {
+        [CommentVerbosity.Concise]?: string;
+        [CommentVerbosity.Standard]?: string;
+        [CommentVerbosity.Detailed]?: string;
+    };
+}
+
 export enum CommentVerbosity {
-    Concise = 1,    // Brief, one-line description of function
-    Standard = 2,   // Few lines of detail
-    Detailed = 3    // Explain every line of the function
+    Concise = 'concise',        // Brief, one-line description of function
+    Standard = 'standard',      // Few lines of detail
+    Detailed = 'detailed'       // Explain every line of the function
 }

@@ -6,6 +6,8 @@ import { PromptManager } from '../config/manager';
 import { CommentVerbosity } from '../types/prompts';
 
 const OPENAI_KEY_SECRET = 'openai-api-key';
+const config = vscode.workspace.getConfiguration('autocom');
+const model = config.get('openaiModel') || 'gpt-4-turbo';
 
 export class OpenAIGenerator extends CommentGenerator {
     private apiKey: string | undefined;
@@ -33,7 +35,7 @@ export class OpenAIGenerator extends CommentGenerator {
             const response = await axios.post(
                 'https://api.openai.com/v1/chat/completions',
                 {
-                    model: 'gpt-4-turbo',
+                    model: model,
                     messages: [{
                         role: 'user',
                         content: prompt

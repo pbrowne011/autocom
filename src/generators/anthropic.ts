@@ -6,6 +6,8 @@ import { PromptManager } from '../config/manager';
 import { CommentVerbosity } from '../types/prompts';
 
 const ANTHROPIC_KEY_SECRET = 'anthropic-api-key';
+const config = vscode.workspace.getConfiguration('autocom');
+const model = config.get('anthropicModel') || 'claude-3-sonnet-20240229';
 
 export class AnthropicGenerator extends CommentGenerator {
     private apiKey: string | undefined;
@@ -34,7 +36,7 @@ export class AnthropicGenerator extends CommentGenerator {
             const response = await axios.post(
                 'https://api.anthropic.com/v1/messages',
                 {
-                    model: 'claude-3-sonnet-20240229',
+                    model: model,
                     max_tokens: 4096,
                     messages: [{
                         role: 'user',

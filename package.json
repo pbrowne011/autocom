@@ -65,18 +65,51 @@
           "group": "autocom"
         }
       ]
-    }
-  },
-  "configuration": {
-    "title": "AI Commenter",
-    "properties": {
-      "aiCommenter.anthropicApiKey": {
-        "type": "string",
-        "description": "API key for Anthropic Claude"
-      },
-      "aiCommenter.openaiApiKey": {
-        "type": "string",
-        "description": "API key for OpenAI GPT"
+    },
+    "configuration": {
+      "title": "Autocom",
+      "properties": {
+        "autocom.openaiModel": {
+          "type": "string",
+          "enum": ["gpt-4-turbo", "gpt-4", "gpt-3.5-turbo"],
+          "default": "gpt-4-turbo",
+          "description": "OpenAI model to use for comment generation"
+        },
+        "autocom.anthropicModel": {
+          "type": "string",
+          "enum": ["claude-3-sonnet", "claude-3-opus", "claude-3-haiku"],
+          "default": "claude-3-sonnet",
+          "description": "Anthropic model to use for comment generation"
+        },
+        "autocom.commentVerbosity": {
+          "type": "string",
+          "enum": ["concise", "standard", "detailed"],
+          "default": "standard",
+          "description": "Level of detail in generated comments"
+        },
+        "autocom.customPrompts": {
+          "type": "object",
+          "default": {},
+          "description": "Custom prompte templates for different comment types",
+          "properties": {
+            "function": {
+              "type": "object",
+              "properties": {
+                "concise": { "type": "string" },
+                "standard": { "type": "string" },
+                "detailed": { "type": "string" }
+              }
+            },
+            "inline": {
+              "type": "object",
+              "properties": {
+                "concise": { "type": "string" },
+                "standard": { "type": "string" },
+                "detailed": { "type": "string" }
+              }
+            }
+          }
+        }
       }
     }
   },
