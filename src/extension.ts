@@ -2,8 +2,11 @@ import * as vscode from 'vscode';
 import { getGenerator } from './generators';
 import { Provider } from './types/models';
 import { formatComment } from './format';
+import { throws } from 'assert';
 
 export function activate(context: vscode.ExtensionContext) {
+    const codeLensProvider = new CommentCodeLensProvider();
+
     context.subscriptions.push(
         vscode.commands.registerCommand(
             'ai-commenter.anthropicComment',
@@ -13,14 +16,25 @@ export function activate(context: vscode.ExtensionContext) {
             'ai-commenter.openaiComment',
             async () => await generateComment('openai', context)
         ),
-        vscode.languages.registerCodeLensProvider('*', new CommentCodeLensProvider())
+        vscode.languages.registerCodeLensProvider('*', codeLensProvider)
+    );
+
+    context.subscriptions.push(
+        vscode.window.onDidChangeTextEditorSelection(() => {
+            codeLensProvider.refresh();
+        })
     );
 }
 
 class CommentCodeLensProvider implements vscode.CodeLensProvider {
+    private _onDidChangeCodeLenses: vscode.EventEmitter<void> = new vscode.EventEmitter<void>();
+    public readonly onDidChangeCodeLenses: vscode.Event<void> = this._onDidChangeCodeLenses.event;
+
     provideCodeLenses(_document: vscode.TextDocument): vscode.CodeLens[] {
         const editor = vscode.window.activeTextEditor;
-        if (!editor) {
+        if (!editor || 
+            editor.document !== _document || 
+            editor.selection.isEmpty) {
             return [];
         }
 
@@ -40,6 +54,10 @@ class CommentCodeLensProvider implements vscode.CodeLensProvider {
                 command: 'ai-commenter.openaiComment'
             })
         ];
+    }
+
+    public refresh(): void {
+        this._onDidChangeCodeLenses.fire();
     }
 }
 
