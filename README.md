@@ -13,8 +13,9 @@ generative AI models such as GPT-4 and Claude Sonnet 3.5.
 
 ## Installation
 
-Install autocom from the VS Code Marketplace or by searching for "autocom" in
-the VS Code extensions panel (`Ctrl-Shift-X`).
+Install autocom from
+[the VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom)
+or by searching for "autocom" in the VS Code extensions panel (`Ctrl-Shift-X`).
 
 ## Usage
 

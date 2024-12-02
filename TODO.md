@@ -23,6 +23,8 @@
   - [ ] Validate settings before use
 
 ### Documentation
+- [ ] Use https://github.com/jeremyrajan/vs-marketplace-stats for badges
+      https://vsmarketplacebadge.jeremyrajan.com/api/badge.svg?itemName=pbrowne011.autocom&install
 - [ ] Create GIFs for README
   - [x] Basic usage demo
   - [ ] Multiple language support
