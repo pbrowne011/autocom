@@ -4,6 +4,53 @@ import { Provider } from './types/models';
 import { formatComment } from './format';
 
 export async function activate(context: vscode.ExtensionContext) {
+    async function generateComment(provider: Provider, context: vscode.ExtensionContext) {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            return;
+        }
+    
+        const selection = editor.selection;
+        const selectedText = editor.document.getText(selection);
+    
+        if (!selectedText) {
+            vscode.window.showWarningMessage('Please select code to generate comments for.');
+            return;
+        }
+    
+        const status = vscode.window.createStatusBarItem(
+            vscode.StatusBarAlignment.Left
+        );
+        status.text = "$(loading~spin) Generating comment...";
+        status.show();
+    
+        try {
+            const generator = getGenerator(provider, context);
+            const comment = await generator.generateComment(selectedText);
+        
+            // Insert comment above the selected code
+            await editor.edit((editBuilder) => {
+                const position = selection.start;
+                const lineStart = new vscode.Position(position.line, 0);
+            
+                // Format comment with block style for the current language
+                const formattedComment = formatComment(
+                    comment, 
+                    editor.document.languageId, 
+                    true  // use block comments
+                );
+            
+                editBuilder.insert(lineStart, formattedComment);
+            });
+        } catch (error) {
+            vscode.window.showErrorMessage(
+                `Failed to generate comment: ${error instanceof Error ? error.message : String(error)}`
+            );
+        } finally {
+            status.hide();
+        }
+    }
+
     let anthropicCommand = vscode.commands.registerCommand(
         'ai-commenter.anthropicComment',
         async () => await generateComment('anthropic', context)
@@ -61,53 +108,6 @@ class CommentCodeLensProvider implements vscode.CodeLensProvider {
 
     public refresh(): void {
         this._onDidChangeCodeLenses.fire();
-    }
-}
-
-async function generateComment(provider: Provider, context: vscode.ExtensionContext) {
-    const editor = vscode.window.activeTextEditor;
-    if (!editor) {
-        return;
-    }
-
-    const selection = editor.selection;
-    const selectedText = editor.document.getText(selection);
-
-    if (!selectedText) {
-        vscode.window.showWarningMessage('Please select code to generate comments for.');
-        return;
-    }
-
-    const status = vscode.window.createStatusBarItem(
-        vscode.StatusBarAlignment.Left
-    );
-    status.text = "$(loading~spin) Generating comment...";
-    status.show();
-
-    try {
-        const generator = getGenerator(provider, context);
-        const comment = await generator.generateComment(selectedText);
-    
-        // Insert comment above the selected code
-        await editor.edit((editBuilder) => {
-            const position = selection.start;
-            const lineStart = new vscode.Position(position.line, 0);
-        
-            // Format comment with block style for the current language
-            const formattedComment = formatComment(
-                comment, 
-                editor.document.languageId, 
-                true  // use block comments
-            );
-        
-            editBuilder.insert(lineStart, formattedComment);
-        });
-    } catch (error) {
-        vscode.window.showErrorMessage(
-            `Failed to generate comment: ${error instanceof Error ? error.message : String(error)}`
-        );
-    } finally {
-        status.hide();
     }
 }
 
