@@ -4,7 +4,7 @@
   "publisher": "pbrowne011",
   "icon": "img/icon.png",
   "description": "Automatically comment your code with generative AI models",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "license": "GPL-3.0-only",
   "engines": {
     "vscode": "^1.95.0"
