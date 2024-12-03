@@ -14,3 +14,5 @@ vsc-extension-quickstart.md
 autocom-*.vsix
 package-lock.json
 *~
+out/**
+webpack.config.js
