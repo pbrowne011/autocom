@@ -52,12 +52,12 @@ export async function activate(context: vscode.ExtensionContext) {
     }
 
     let anthropicCommand = vscode.commands.registerCommand(
-        'ai-commenter.anthropicComment',
+        'autocom.anthropicComment',
         async () => await generateComment('anthropic', context)
     );
     
     let openaiCommand = vscode.commands.registerCommand(
-        'ai-commenter.openaiComment',
+        'autocom.openaiComment',
         async () => await generateComment('openai', context)
     );
     
@@ -81,6 +81,13 @@ class CommentCodeLensProvider implements vscode.CodeLensProvider {
     public readonly onDidChangeCodeLenses: vscode.Event<void> = this._onDidChangeCodeLenses.event;
 
     provideCodeLenses(_document: vscode.TextDocument): vscode.CodeLens[] {
+        const config = vscode.workspace.getConfiguration('autocom');
+        const isCodeLensEnabled = config.get<boolean>('enableCodeLens');
+
+        if (!isCodeLensEnabled) {
+            return [];
+        }
+
         const editor = vscode.window.activeTextEditor;
         if (!editor || 
             editor.document !== _document || 
@@ -97,11 +104,11 @@ class CommentCodeLensProvider implements vscode.CodeLensProvider {
         return [
             new vscode.CodeLens(range, {
                 title: "💭 Comment with Claude",
-                command: 'ai-commenter.anthropicComment'
+                command: 'autocom.anthropicComment'
             }),
             new vscode.CodeLens(range, {
                 title: "💭 Comment with GPT",
-                command: 'ai-commenter.openaiComment'
+                command: 'autocom.openaiComment'
             })
         ];
     }
