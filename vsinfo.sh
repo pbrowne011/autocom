@@ -11,4 +11,4 @@ curl -X POST 'https://marketplace.visualstudio.com/_apis/public/gallery/extensio
             }]
           }],
         "flags": 402
-       }' | jq
+       }' | jq 'del(.results[].extensions[].versions)'
