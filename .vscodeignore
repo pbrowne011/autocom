@@ -15,4 +15,5 @@ autocom-*.vsix
 package-lock.json
 *~
 out/**
+dist/** */
 webpack.config.js

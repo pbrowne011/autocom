@@ -104,6 +104,16 @@
           "default": "standard",
           "description": "Level of detail in generated comments"
         },
+        "autocom.commentType": {
+          "type": "string",
+          "enum": [
+            "block",
+            "inline",
+            "doxygen"
+          ],
+          "default": "block",
+          "description": "Generate Doxygen, block, or inline comments"
+        },
         "autocom.customPrompts": {
           "type": "object",
           "default": {},
@@ -142,13 +152,13 @@
       }
     }
   },
-  "scripts": {
-    "vscode:prepublish": "webpack --mode production",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src",
-    "test": "vscode-test"
+    "scripts": {
+      "vscode:prepublish": "webpack --mode production",
+      "compile": "webpack",
+      "watch": "webpack --watch",
+      "pretest": "npm run compile && npm run lint",
+      "lint": "eslint src",
+      "test": "vscode-test"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.9",
