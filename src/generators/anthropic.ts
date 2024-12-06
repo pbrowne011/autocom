@@ -26,7 +26,7 @@ export class AnthropicGenerator extends CommentGenerator {
         );
 
         const prompt = this.promptManager.getPrompt(
-            options?.type || 'function',
+            options?.type || 'block',
             options?.verbosity || CommentVerbosity.Concise,
             options?.language,
             { code }

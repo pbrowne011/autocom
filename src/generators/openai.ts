@@ -25,7 +25,7 @@ export class OpenAIGenerator extends CommentGenerator {
         );
 
         const prompt = this.promptManager.getPrompt(
-            options?.type || 'function',
+            options?.type || 'block',
             options?.verbosity || CommentVerbosity.Concise,
             options?.language,
             { code }
@@ -49,6 +49,8 @@ export class OpenAIGenerator extends CommentGenerator {
                     }
                 }
             );
+
+            console.log(response.data.choices[0].message.content);
     
             return this.formatResponse(response.data.choices[0].message.content);
         } catch (error) {

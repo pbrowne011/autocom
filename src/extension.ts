@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { getGenerator } from './generators';
-import { Provider } from './types/models';
+import { Provider, CommentOptions } from './types/models';
+import { CommentVerbosity } from './types/prompts';
 import { formatComment } from './format';
 
 export async function activate(context: vscode.ExtensionContext) {
@@ -26,7 +27,15 @@ export async function activate(context: vscode.ExtensionContext) {
     
         try {
             const generator = getGenerator(provider, context);
-            const comment = await generator.generateComment(selectedText);
+            const config = vscode.workspace.getConfiguration('autocom');
+
+            const options: CommentOptions = {
+                type: config.get('commentType') || 'doxygen',
+                language: editor.document.languageId,
+                verbosity: config.get('commentVerbosity') || CommentVerbosity.Standard
+            };
+
+            const comment = await generator.generateComment(selectedText, options);
         
             // Insert comment above the selected code
             await editor.edit((editBuilder) => {

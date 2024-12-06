@@ -3,7 +3,7 @@ import { CommentVerbosity } from "./prompts";
 export type Provider = 'anthropic' | 'openai';// | 'gemini';
 
 export interface CommentOptions {
-    type: 'function' | 'inline' | 'block';
+    type: 'block' | 'inline' | 'doxygen';
     verbosity: CommentVerbosity;
     language?: string;
     maxLength?: number;

@@ -16,29 +16,17 @@ export interface CommentTypeConfig {
 
 export interface PromptConfig {
     templates: {
-        function: CommentTypeConfig;
+        block: CommentTypeConfig;
         inline: CommentTypeConfig;
-        block?: CommentTypeConfig;
+        doxygen: CommentTypeConfig;
     };
     languageOverrides?: Record<string, LanguageSpecificPrompt>;
 }
 
 export interface CustomPrompts {
-    function?: {
-        [CommentVerbosity.Concise]?: string;
-        [CommentVerbosity.Standard]?: string;
-        [CommentVerbosity.Detailed]?: string;
-    };
-    inline?: {
-        [CommentVerbosity.Concise]?: string;
-        [CommentVerbosity.Standard]?: string;
-        [CommentVerbosity.Detailed]?: string;
-    };
-    block?: {
-        [CommentVerbosity.Concise]?: string;
-        [CommentVerbosity.Standard]?: string;
-        [CommentVerbosity.Detailed]?: string;
-    };
+    block?: CommentTypeConfig;
+    inline?: CommentTypeConfig;
+    doxygen?: CommentTypeConfig;
 }
 
 export enum CommentVerbosity {
