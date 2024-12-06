@@ -4,10 +4,10 @@
 [![VS Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/pbrowne011.autocom?color=darkgreen)](https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom)
 [![VS Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/pbrowne011.autocom)](https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom)
 
-Autocom is a VS Code extension that automatically comments your code using
-generative AI models such as GPT-4 and Claude Sonnet 3.5.
 
-<!--Autocom is a VS Code extension that automatically generates both natural language comments and Doxygen documentation for your code using AI models such as GPT-4 and Claude Sonnet 3.5.-->
+Autocom is a VS Code extension that automatically generates Doxygen styled
+comments and natural language comments for your code using AI models such as
+GPT-4 and Claude Sonnet 3.5.
 
 <p align="center">
   <img src="img/demo-overview.gif" alt="Overview of autocom in action" width="600"/>
@@ -42,7 +42,8 @@ is [stored securely by your OS](https://vscode-api.js.org/interfaces/vscode.Secr
 
 ## Features
 
-- **One-click comment generation** for functions, classes, and code blocks
+- **Doxygen-style comments** generated for your code
+- **One-click comment generation** for code blocks
 - **Multiple AI models** supported:
   - Anthropic: `claude-3-sonnet` (default), `claude-3-opus`, `claude-3-haiku`
   - OpenAI: `gpt-4-turbo` (default), `gpt-4`, `gpt-3.5-turbo`
@@ -59,6 +60,9 @@ Configure through VS Code settings (File > Preferences > Settings > Extensions >
 
 ```jsonc
 {
+    // Optional: Set comment type
+    "autocom.commentType": "doxygen",           // default "block", "inline
+
     // Optional: Enable CodeLens
     "autocom.enableCodeLens": true,              // default false
 
