@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="img/icon.png" alt="Autocom icon" width="128"/>
-</p>
-
 # autocom
 
 [![VS Marketplace Version](https://shields.io/visual-studio-marketplace/v/pbrowne011.autocom?color=blue)](https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom)
@@ -40,7 +36,7 @@ selection to comment. This is disabled by default, but can be added by setting
 <insert right click gif>
 
 The first time you use each model, you will be prompted for an API key, which
-is stored securely by your OS. 
+is [stored securely by your OS](https://vscode-api.js.org/interfaces/vscode.SecretStorage.html). 
 - [Get OpenAI API key](https://platform.openai.com/account/api-keys)
 - [Get Anthropic API key](https://console.anthropic.com/settings/keys)
 
@@ -97,7 +93,13 @@ and examples. (TODO: add this documentation)
 
 GPL 3.0
 
-## Development
+<p align="center">
+  <img src="img/icon.png" alt="Autocom icon" width="128"/>
+</p>
+
+---
+
+### Development
 
 ```bash
 # Working on features
@@ -115,3 +117,15 @@ git push --tags    # trigger the CI/CD pipeline
 2. Crop video (https://online-video-cutter.com/crop-video)
 3. Turn into GIF (https://ezgif.com/video-to-gif)
 4. Add GIF to /img, link GIF in .md file
+
+### API Key Issues
+
+Say you've used this extension and want to delete the API key associated with
+it. If you used a model from OpenAI, it could take a while for this key to be
+deactivated; thus, if you try using the extension, it will likely not ask you
+for another API key (and will still work).
+
+For reference, see [this recent forum post](https://community.openai.com/t/api-key-deleted-but-still-usable/995249/4).
+Note that API keys are stored securely using
+[the SecureStorage interface](https://vscode-api.js.org/interfaces/vscode.SecretStorage.html)
+provided by VS Code for extensions.

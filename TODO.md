@@ -8,10 +8,9 @@
 - [ ] Support language-specific Doxygen: Java, C++, Python, JS/TS, Go
 - [ ] Make sure to include tags: @brief, @param, @return, @throws
 - [ ] Change comment options to make sense - remove function, default block
-- [ ] Make sure you can change API keys after they expire/are revoked
-- [ ] Add lang support for bash, C, x86, ARM asm
+- [x] Make sure you can change API keys after they expire/are revoked
+- [ ] Add lang support for: bash, C, x86, ARM asm, HTML, CSS
 - [ ] Add demo screen recordings
-- [ ] Add the ability to remove CodeLens (it could get annoying)
 - [ ] Create more GIFs
 
 ### UI Improvements

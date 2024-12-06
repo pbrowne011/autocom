@@ -52,27 +52,23 @@ export class OpenAIGenerator extends CommentGenerator {
     
             return this.formatResponse(response.data.choices[0].message.content);
         } catch (error) {
-            await this.handleApiError(error);
+            try {
+                await super.handleApiError(error, OPENAI_KEY_SECRET);
+            } finally {
+                // Needs to be outside handleApiError to undefine specific
+                // apiKey of current context
+                if (axios.isAxiosError(error) && 
+                    error.response && 
+                    (error.response.status === 401 || error.response.status === 403)) {
+                    this.apiKey = undefined;
+                }
+            }
+
             throw error;
         }
     }
 
     protected formatResponse(response: string): string {
         return response.trim();
-    }
-
-    private async handleApiError(error: unknown): Promise<void> {
-        if (axios.isAxiosError(error)) {
-            if (error.response?.status === 429) {
-                throw new Error('Rate limit exceeded.');
-            } else if (error.response?.status === 401) {
-                this.apiKey = undefined;
-                await this.context.secrets.delete(OPENAI_KEY_SECRET);
-                throw new Error('Invalid API key.');
-            } else {
-                throw new Error(`API error: ${error.response?.data?.error?.message ||
-                    error.message}`);
-            }
-        }
     }
 }

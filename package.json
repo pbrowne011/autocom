@@ -72,7 +72,7 @@
         "autocom.enableCodeLens": {
           "type": "boolean",
           "default": false,
-          "description": "Enable/disable CodeLens (comment generation buttons) above selected code"
+          "description": "Enable comment generation buttons above selected code"
         },
         "autocom.openaiModel": {
           "type": "string",
