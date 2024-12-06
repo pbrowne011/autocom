@@ -4,7 +4,7 @@
   "publisher": "pbrowne011",
   "icon": "img/icon.png",
   "description": "Automatically comment your code with generative AI models",
-  "version": "0.0.16",
+  "version": "0.1.0",
   "license": "GPL-3.0-only",
   "engines": {
     "vscode": "^1.95.0"
@@ -152,13 +152,13 @@
       }
     }
   },
-    "scripts": {
-      "vscode:prepublish": "webpack --mode production",
-      "compile": "webpack",
-      "watch": "webpack --watch",
-      "pretest": "npm run compile && npm run lint",
-      "lint": "eslint src",
-      "test": "vscode-test"
+  "scripts": {
+    "vscode:prepublish": "webpack --mode production",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.9",
