@@ -2,20 +2,19 @@
 
 ## High Priority
 
-- [ ] Add doxygen-style as comment option (next to standard, concise, detailed)
+- [x] Add doxygen-style as comment option (next to standard, concise, detailed)
       Examples: https://doxygen.nl/examples.html
-- [ ] Check if doxygen makes sense in verobity or function/inline context
-- [ ] Support language-specific Doxygen: Java, C++, Python, JS/TS, Go
-- [ ] Make sure to include tags: @brief, @param, @return, @throws
-- [ ] Change comment options to make sense - remove function, default block
+- [x] Check if doxygen makes sense in verobity or function/inline context
+- [x] Make sure to include tags: @brief, @param, @return, @throws
+- [x] Change comment options to make sense - remove function, default block
 - [x] Make sure you can change API keys after they expire/are revoked
-- [ ] Add lang support for: bash, C, x86, ARM asm, HTML, CSS
+- [x] Add lang support for: bash, C, x86, ARM asm, HTML, CSS
 - [ ] Add demo screen recordings
 - [ ] Create more GIFs
 
 ### UI Improvements
 - [ ] Add intuitive ways to change comment settings without editing `settings.json`
-  - [ ] Add CodeLens above functions to quickly change comment style
+  - ~~[ ] Add CodeLens above functions to quickly change comment style~~
   - [ ] Create dropdown menu for selecting comment verbosity
   - [ ] Add command palette options for changing settings
   - [ ] Quick-pick menu for model selection when generating comments

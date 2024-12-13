@@ -4,43 +4,32 @@ import { wrapLine } from './wrap';
 export function formatComment(comment: string, language: string, useBlockComment: boolean = true): string {
     const style = getCommentStyle(language);
     
-    if (useBlockComment) {
-        // Split into lines, trim whitespace, and wrap long lines
-        const lines = comment
-            .split('\n')
-            .map(line => line.trim())
-            .flatMap(line => wrapLine(line));
-        
-        // For single-line comments, use simple block format
-        if (lines.length === 1) {
-            return `${style.blockStart} ${lines[0]} ${style.blockEnd}\n`;
-        }
-        
-        // For multi-line comments, format with proper spacing
-        const isJSDoc = style.blockStart === '/**';
-        
-        if (isJSDoc) {
-            // JSDoc style
-            return [
-                style.blockStart,
-                ...lines.map(line => ` * ${line}`),
-                ' */',
-                ''
-            ].join('\n');
-        } else {
-            // Standard block comment style
-            return [
-                style.blockStart,
-                ...lines.map(line => ` * ${line}`),
-                style.blockEnd,
-                ''
-            ].join('\n');
-        }
-    } else {
-        // Inline comment style
+
+    if (!style.block || !useBlockComment) {
         return comment
             .split('\n')
-            .map(line => `${style.prefix} ${line}`)
+            .flatMap(line => wrapLine(line))
+            .map(line => `${style.prefix} ${line.trim()}`)
             .join('\n') + '\n';
     }
+
+    const lines = comment
+        .split('\n')
+        .map(line => line.trim())
+        .flatMap(line => wrapLine(line));
+        
+    // Single-line comment: use simple block format
+    if (lines.length === 1) {
+        return `${style.block.start} ${lines[0]} ${style.block.end}\n`;
+    }
+        
+    // Multi-line comment
+    const isJSDoc = style.block.start === '/**';
+    
+    return [
+        style.block.start,
+        ...lines.map(line => ` * ${line}`),
+        isJSDoc ? ' */' : style.block.end,
+        ''
+    ].join('\n');
 }
