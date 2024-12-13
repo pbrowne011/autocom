@@ -49,7 +49,7 @@ is [stored securely by your OS](https://vscode-api.js.org/interfaces/vscode.Secr
   - OpenAI: `gpt-4-turbo` (default), `gpt-4`, `gpt-3.5-turbo`
 - **Smart language detection** and appropriate comment styling
 - **Support for 10+ languages** including C++, Python, JavaScript, Java, Go,
-  and Rust,
+  Rust, assembly (x86 and ARM), Bash, ...
 - **Default keyboard shortcuts** for convenient use
 
 <insert two diff langs gifs>
@@ -91,7 +91,6 @@ and examples. (TODO: add this documentation)
 - Does not allow inline commments, only block comments at the top of a
   block of code
 - Does not take full context of code in file or directory, only highlighted code
-- Currently missing support for Doxygen (to be added as next feature)
 
 ## License
 
