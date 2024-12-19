@@ -4,17 +4,13 @@
 
 - [x] Add doxygen-style as comment option (next to standard, concise, detailed)
       Examples: https://doxygen.nl/examples.html
-- [x] Check if doxygen makes sense in verobity or function/inline context
-- [x] Make sure to include tags: @brief, @param, @return, @throws
-- [x] Change comment options to make sense - remove function, default block
-- [x] Make sure you can change API keys after they expire/are revoked
-- [x] Add lang support for: bash, C, x86, ARM asm, HTML, CSS
+- [ ] Fix commenting so that when the LLM provides irrelevant feedback and
+      ignores user input, we can detect (and prevent in the first place)
 - [ ] Add demo screen recordings
 - [ ] Create more GIFs
 
 ### UI Improvements
 - [ ] Add intuitive ways to change comment settings without editing `settings.json`
-  - ~~[ ] Add CodeLens above functions to quickly change comment style~~
   - [ ] Create dropdown menu for selecting comment verbosity
   - [ ] Add command palette options for changing settings
   - [ ] Quick-pick menu for model selection when generating comments
@@ -22,15 +18,10 @@
 
 ### Testing & Error Handling
 - [ ] Add test suite
-  - [ ] Unit tests
+  - [ ] Unit tests (started)
   - [ ] Integration tests for model interactions
   - [ ] Test custom prompt configurations
   - [ ] Mock API responses (to avoid $$)
-- [ ] Improve error handling
-  - [ ] Better error messages for API failures
-  - [ ] Handle rate limiting more gracefully
-  - [ ] Add retry logic for failed requests
-  - [ ] Validate settings before use
 
 ### Documentation
 - [ ] Create GIFs for README
